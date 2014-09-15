@@ -9,7 +9,9 @@ request = urllib2.Request(url, headers={'User-Agent' : "Magic Browser"})
 page = urllib2.urlopen( request )
 soup = BeautifulSoup(page.read())
 
-os.mkdir("Minecraft")
+if not os.path.exists("Minecraft"):
+	os.mkdir("Minecraft")
+	print "Created Minecraft directory"
 
 mcReleases = soup.findAll('div',{'class':'box'})
 for mcRelease in mcReleases: #loop through The release types
