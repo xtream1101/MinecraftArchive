@@ -46,7 +46,7 @@ for mcRelease in mcReleases: #loop through The release types
 						jarFile.retrieve(link['href'], savePath+"/" +fixedDate+"_"+releaseName+"_"+version.string+"_"+link['class'][0] +".jar")
 						print "Downloading client jar version " + version.string
 					if not os.path.isfile(savePath+"/" +fixedDate+"_"+releaseName+"_"+version.string+"_"+link['class'][0] +".json"):
-						jarFile.retrieve(link['href'], savePath+"/" +fixedDate+"_"+releaseName+"_"+version.string+"_"+link['class'][0] +".json")
+						jarFile.retrieve(versionLink, savePath+"/" +fixedDate+"_"+releaseName+"_"+version.string+"_"+link['class'][0] +".json")
 						print "Downloading client version file " + version.string
 				if not os.path.exists(savePath):
 					os.mkdir(savePath)
