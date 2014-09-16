@@ -23,15 +23,6 @@ def createFolders(buildType):
 	if not os.path.exists("Minecraft/"+buildType+"/servers"):
 		os.mkdir("Minecraft/"+buildType+"/servers")
 		print "Created "+buildType+" servers directory"
-def urlExists(url):
-	urllib2.Request(url, headers={'User-Agent' : "Magic Browser"}) 
-	page = urllib2.urlopen( request )
-	code = page.getcode()
-	if code == 200:
-		return True
-	else:
-		return False
-		
 createFolders("release") #stable
 createFolders("snapshot") 
 createFolders("old_beta")
