@@ -9,19 +9,22 @@ VERSIONURL="https://s3.amazonaws.com/Minecraft.Download/versions/:VERSION:/:VERS
 request = urllib2.Request(url, headers={'User-Agent' : "Magic Browser"}) 
 page = urllib2.urlopen( request )
 soup = BeautifulSoup(page.read())
-
 if not os.path.exists("Minecraft"):
 	os.mkdir("Minecraft")
 	print "Created Minecraft directory"
-if not os.path.exists("Minecraft/versions"):
-	os.mkdir("Minecraft/versions")
-	print "Created versions directory"
-if not os.path.exists("Minecraft/servers"):
-	os.mkdir("Minecraft/servers")
-	print "Created servers directory"
-
-
-
+def createFolders(buildType):
+	if not os.path.exists("Minecraft/"+buildType):
+		os.mkdir("Minecraft/"+buildType)
+	if not os.path.exists("Minecraft/"+buildType+"/versions"):
+		os.mkdir("Minecraft/"+buildType+"/versions")
+		print "Created "+buildType+" versions directory"
+	if not os.path.exists("Minecraft/"+buildType+"/servers"):
+		os.mkdir("Minecraft/"+buildType+"/servers")
+		print "Created "+buildType+" servers directory"
+createFolders("stable")
+createFolders("snapshot")
+createFolders("beta")
+createFolders("alpha")
 mcReleases = soup.findAll('div',{'class':'box'})
 for mcRelease in mcReleases: #loop through The release types
 	releaseName = mcRelease['id']
@@ -37,7 +40,7 @@ for mcRelease in mcReleases: #loop through The release types
 			jarFile = urllib.URLopener()
 			versionFile = urllib.URLopener();
 			if link['class'][0] == "client":
-				savePath = "Minecraft/versions/"+fixedDate+"_"+releaseName+"_"+version.string+"_"+link['class'][0]
+				savePath = "Minecraft/"+releaseName+"/versions/"+fixedDate+"_"+releaseName+"_"+version.string+"_"+link['class'][0]
 				if os.path.exists(savePath):
 					if not os.path.isfile(savePath+"/" +fixedDate+"_"+releaseName+"_"+version.string+"_"+link['class'][0] +".jar"):
 						jarFile.retrieve(link['href'], savePath+"/" +fixedDate+"_"+releaseName+"_"+version.string+"_"+link['class'][0] +".jar")
@@ -58,7 +61,7 @@ for mcRelease in mcReleases: #loop through The release types
 					print versionLink
 					print "\n"
 			if link['class'][0] == "server":
-				savePath = "Minecraft/servers"
+				savePath = "Minecraft/"+releaseName+"/servers"
 				if not os.path.isfile(savePath+"/" +fixedDate+"_"+releaseName+"_"+version.string+"_"+link['class'][0] +".jar"):
 					jarFile.retrieve(link['href'], savePath+"/" +fixedDate+"_"+releaseName+"_"+version.string+"_"+link['class'][0] +".jar")
 					print version.string
