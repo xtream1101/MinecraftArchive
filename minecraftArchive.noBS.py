@@ -2,7 +2,7 @@ import urllib2
 import urllib
 import json
 import os
-url = "https://s3.amazonaws.com/Minecraft.Download/versions/versions.json"
+url = "https://launchermeta.mojang.com/mc/game/version_manifest.json"
 DOWNLOADURL_json = "https://s3.amazonaws.com/Minecraft.Download/versions/:VERSION:/:VERSION:.json"
 DOWNLOADURL_jar = "https://s3.amazonaws.com/Minecraft.Download/versions/:VERSION:/:VERSION:.jar"
 DOWNLOADURL_serverjar = "https://s3.amazonaws.com/Minecraft.Download/versions/:VERSION:/minecraft_server.:VERSION:.jar"
